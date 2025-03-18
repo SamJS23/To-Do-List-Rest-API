@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+
+body {
+  @apply bg-cyan-200;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.navbar {
+  @apply w-full bg-blue-600 text-white flex justify-between items-center px-6 py-4 fixed top-0 left-0 shadow-md;
+}
+
+.nav-left {
+  @apply text-xl font-bold;
+}
+
+.nav-right {
+  @apply flex gap-6 items-center;
+}
+
+.nav-link {
+  @apply text-white hover:text-gray-300 transition cursor-pointer;
+}
+
+
+.sign-out-btn {
+  @apply bg-red-600 text-white px-4 py-2 hover:bg-red-700 transition border-none;
+  border-radius: 0;
+}
+
+
+.content-container {
+  @apply pt-24 flex justify-center items-center;
+}
+
+.todo-container, .profile-container, .auth-container {
+  @apply w-full max-w-md mx-auto p-6 bg-white mt-6 text-center;
+}
+
+
+.input-field {
+  @apply w-full p-2 border focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.add-btn {
+  @apply px-4 py-2 bg-blue-500 text-white font-bold hover:bg-blue-600 transition;
+}
+
+.task-item {
+  @apply flex justify-between items-center bg-gray-100 p-3 mb-2;
+}
+
+.edit-btn, .save-btn {
+  @apply bg-blue-500 text-white;
+}
+
+
+h1 {
+  @apply text-xl font-bold mb-4;
+}
+
+
+.profile-container {
+  @apply w-full max-w-md mx-auto p-6 bg-white mt-6 text-center;
+}
+
+.profile-content {
+  @apply flex flex-col gap-4;
+}
+
+.edit-save-btn {
+  @apply bg-blue-500 text-white px-4 py-2;
+}
+
+.profile-text {
+  @apply text-gray-700 bg-gray-100 p-2 rounded;
+}
+
+.auth-container {
+  @apply w-full max-w-md mx-auto p-6 bg-white mt-6 text-center rounded-lg shadow-lg;
+}
+
+.auth-btn {
+  @apply px-4 py-2 bg-black text-white font-bold hover:bg-gray-800 transition;
+}
+
+.auth-link {
+  @apply text-blue-500 cursor-pointer;
+}
+
+.profile-picture-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-icon {
+  font-size: 50px;
+}
+
+.change-picture-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.change-picture-btn:hover {
+  background-color: #45a049;
+}
+
