@@ -1,4 +1,4 @@
-# To-Do List (React Project)
+# To-Do List 
 
 **Name:** Samuel James Setiadi  
 **Class:** L4CC  
