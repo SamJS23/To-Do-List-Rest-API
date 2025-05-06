@@ -1,59 +1,51 @@
 import { useState, useEffect } from "react";
-import { auth, db } from "./firebase-config.js";
-import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios
 import "./App.css";
 
 function Profile() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // full user object
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        
-        setEmail(currentUser.email);
-        
-        const userRef = doc(db, "User", currentUser.uid);
-        const userDoc = await getDoc(userRef);
-        
-        if (userDoc.exists()) {
-          setName(userDoc.data().name || "");
-        } else {
-          await setDoc(userRef, {
-            email: currentUser.email,
-            name: "",
-            createdAt: new Date()
-          });
-          setName("");
-        }
-      } else {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/user/info", {
+          withCredentials: true,
+        });
+        setUser(res.data);
+        setName(res.data.name);
+        setEmail(res.data.email);
+      } catch (err) {
+        console.error("Not authenticated or failed to fetch user:", err);
         navigate("/");
       }
-    });
+    };
 
-    return () => unsubscribe();
+    fetchUser();
   }, [navigate]);
 
   const updateProfile = async () => {
-    if (user) {
-      const userRef = doc(db, "User", user.uid);
-      await updateDoc(userRef, { name });
+    try {
+      await axios.put(
+        "http://localhost:5000/api/user/update",
+        { name },
+        { withCredentials: true }
+      );
       alert("Profile updated successfully!");
       setIsEditing(false);
+    } catch (err) {
+      alert(err.response?.data?.message || "Update failed.");
     }
   };
 
   return (
     <div className="profile-container">
       <h1>Profile</h1>
-      
-      
+
       <div className="profile-picture-container">
         <div className="profile-picture">
           <span className="profile-icon">👤</span>
@@ -62,7 +54,7 @@ function Profile() {
           Change Picture
         </button>
       </div>
-      
+
       <div className="profile-content">
         <label>Email:</label>
         <p className="profile-text">{email}</p>

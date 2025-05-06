@@ -1,29 +1,37 @@
 import { useState } from "react";
-import { auth } from "./firebase-config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import axios from "axios";
 
 function Auth({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
 
-  const Signup = async () => {
+  const handleAuth = async () => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      setUser(userCredential.user);
-    } catch (error) {
-      alert(error.message);
+      const url = isLogin ? `http://localhost:5000/api/user/signin` : `http://localhost:5000/api/user/signup`;
+  
+      const res = await axios.post(
+        url,
+        { email, password },
+        { withCredentials: true }
+      );
+  
+      if (isLogin) {
+        const infoRes = await axios.get(`http://localhost:5000/api/user/info`, {
+          withCredentials: true
+        });
+  
+        setUser(infoRes.data);
+      } else {
+        alert("Sign up successful! Please log in.");
+        setIsLogin(true);
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Something went wrong");
     }
   };
+  
 
-  const Login = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      setUser(userCredential.user);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
 
   return (
     <div className="auth-container">
@@ -43,7 +51,7 @@ function Auth({ setUser }) {
         placeholder="Password" 
       />
       <button 
-        onClick={isLogin ? Login : Signup} 
+        onClick={handleAuth} 
         className="auth-btn mt-2">
         {isLogin ? "Login" : "Sign Up"}
       </button>
