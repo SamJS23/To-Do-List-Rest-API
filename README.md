@@ -13,6 +13,7 @@
 1. Clone the repository and navigate to the backend directory:  
    ```sh
    git clone https://github.com/SamJS23/To-Do-List-Rest-API.git
+   cd To-Do-List-Rest-API
    cd node-rest-api
 2. Install dependencies:  
    ```sh
