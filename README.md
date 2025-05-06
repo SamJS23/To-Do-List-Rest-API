@@ -12,7 +12,7 @@
 
 1. Clone the repository and navigate to the backend directory:  
    ```sh
-   git clone https://github.com/SamJS23/To-Do-List.git
+   git clone https://github.com/SamJS23/To-Do-List-Rest-API.git
    cd node-rest-api
 2. Install dependencies:  
    ```sh
@@ -29,11 +29,11 @@
 6. Run the Frontend:
    ```sh
    npm run dev
-<br> 
+   
 ## API Endpoint Design 
 Users Routes 
-<img src="API Endpoint Design Images\Screenshot 2025-05-06 172250.png"><br>
+<img src="API Endpoint Design Images\Screenshot 2025-05-06 172250.png"><br><br>
 ToDo Routes 
-<img src="API Endpoint Design Images\Screenshot 2025-05-06 172300.png"><br>
+<img src="API Endpoint Design Images\Screenshot 2025-05-06 172300.png"><br><br>
 API Documentation can also be accessed using http://localhost:5000/todolist/api-docs/
 
